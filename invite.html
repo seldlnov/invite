@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Приглашение 💖</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FAEEE6;
+            overflow: hidden;
+        }
+
+        #content {
+            background-color: #FFC0CB;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            padding: 25px;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            border-radius: 14px;
+            padding: 15px 25px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        #yesButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            position: fixed;
+            top: -100px;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6"><path fill="%23FF0000" d="M16 29.6c-1-.6-21-12.6-16-20C5.7 5.6 10.3 4 16 11c5.7-7 10.3-5.4 16-2.6 5 7.4-15 19.6-16 20z"/></svg>');
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(110vh); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="content">
+    <h2 id="question">Придёшь на свидание? 💕</h2>
+    <button id="yesButton">ДА</button>
+    <button id="noButton">НЕТ</button>
+    <p id="message"></p>
+</div>
+
+<script>
+    let noClickCount = 0;
+
+    document.getElementById('noButton').addEventListener('click', function () {
+        noClickCount++;
+
+        this.style.position = 'absolute';
+        this.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        this.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+
+        if (noClickCount === 5) {
+            document.getElementById('message').innerText = 'Ну пжжж';
+        }
+
+        if (noClickCount >= 10) {
+            this.disabled = true;
+            this.style.color = 'grey';
+            document.getElementById('message').innerText = 'Кнопка сломалась 😢';
+        }
+    });
+
+    document.getElementById('yesButton').addEventListener('click', function () {
+        document.getElementById('question').innerText = 'ЖДУ СВИДАНИЯ ❤️';
+        document.getElementById('yesButton').style.display = 'none';
+        document.getElementById('noButton').style.display = 'none';
+
+        for (let i = 0; i < 60; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+        }
+    });
+</script>
+
+</body>
+</html>
